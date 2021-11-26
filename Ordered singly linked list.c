@@ -26,7 +26,7 @@ void insertordered(int x)
     }
 
     next=first;
-    while(next->link != NULL && p->info >= next->info)
+    while(next->link != NULL && p->info >= next->link->info)
     {
         next=next->link;
     }
