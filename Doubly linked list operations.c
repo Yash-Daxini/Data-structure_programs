@@ -34,20 +34,23 @@ void deletefromspecified(int value)
     struct node *next=l,*pre,*temp;
     while(next->info != value)
     {
+        pre=next;
+        if(pre==r)
+        {
+            printf("Linked list not contain this value");
+            return 0;
+        }
         next=next->rptr;
-
     }
-    if(next->info != value)
-    {
-        printf("Element is not in list");
-        return;
-    }
-        next->lptr->rptr=next->rptr;
-        free(next);
+        if(next->info != value)
+        {
+            printf("Element is not in list");
+            return;
+        }
         if(next==l)
         {
             temp=next->rptr;
-            free(l);
+            free(next);
             temp->lptr=NULL;
             l=temp;
             return ;
@@ -55,8 +58,22 @@ void deletefromspecified(int value)
         else if(next==r)
         {
             next->lptr->rptr=NULL;
-            free(r);
+            free(next);
             r=pre;
+            return;
+        }
+        else if(next==l && next==r)
+        {
+            free(next);
+            l=NULL;
+            r=NULL;
+            return;
+        }
+        else
+        {
+            next->lptr->rptr=next->rptr;
+            next->rptr->lptr=next->lptr;
+            free(next);
             return;
         }
 }
